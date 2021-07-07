@@ -17,6 +17,7 @@ class SelfPacedDueDatesTests(ModuleStoreTestCase):  # lint-amnesty, pylint: disa
         self.course = CourseFactory.create()
         for i in range(4):
             ItemFactory(parent=self.course, category="sequential", display_name=f"Section {i}")
+        self.store = modulestore()
 
     def test_basic_spacing(self):
         expected_sections = [
@@ -49,10 +50,10 @@ class SelfPacedDueDatesTests(ModuleStoreTestCase):  # lint-amnesty, pylint: disa
         _has_assignment_blocks should return true if the argument block
         children leaf nodes include an assignment that is graded and scored
         """
-        with modulestore().bulk_operations(self.course.id):
+        with self.store.bulk_operations(self.course.id):
             sequence = ItemFactory(parent=self.course, category="sequential")
             vertical = ItemFactory(parent=sequence, category="vertical")
-            sequence = modulestore().get_item(sequence.location)
+            sequence = self.store.get_item(sequence.location)
             assert _has_assignment_blocks(sequence) is False
 
             # Ungraded problems do not count as assignment blocks
@@ -62,7 +63,7 @@ class SelfPacedDueDatesTests(ModuleStoreTestCase):  # lint-amnesty, pylint: disa
                 graded=True,
                 weight=0,
             )
-            sequence = modulestore().get_item(sequence.location)
+            sequence = self.store.get_item(sequence.location)
             assert _has_assignment_blocks(sequence) is False
             ItemFactory.create(
                 parent=vertical,
@@ -70,7 +71,7 @@ class SelfPacedDueDatesTests(ModuleStoreTestCase):  # lint-amnesty, pylint: disa
                 graded=False,
                 weight=1,
             )
-            sequence = modulestore().get_item(sequence.location)
+            sequence = self.store.get_item(sequence.location)
             assert _has_assignment_blocks(sequence) is False
 
             # Method will return true after adding a graded, scored assignment block
@@ -80,7 +81,7 @@ class SelfPacedDueDatesTests(ModuleStoreTestCase):  # lint-amnesty, pylint: disa
                 graded=True,
                 weight=1,
             )
-            sequence = modulestore().get_item(sequence.location)
+            sequence = self.store.get_item(sequence.location)
             assert _has_assignment_blocks(sequence) is True
 
     def test_sequence_with_graded_and_ungraded_assignments(self):
@@ -88,10 +89,10 @@ class SelfPacedDueDatesTests(ModuleStoreTestCase):  # lint-amnesty, pylint: disa
         _gather_graded_items should set a due date of None on ungraded problem blocks
         even if the block has graded siblings in the sequence
         """
-        with modulestore().bulk_operations(self.course.id):
+        with self.store.bulk_operations(self.course.id):
             sequence = ItemFactory(parent=self.course, category="sequential")
             vertical = ItemFactory(parent=sequence, category="vertical")
-            sequence = modulestore().get_item(sequence.location)
+            sequence = self.store.get_item(sequence.location)
             ItemFactory.create(
                 parent=vertical,
                 category='problem',
@@ -114,5 +115,37 @@ class SelfPacedDueDatesTests(ModuleStoreTestCase):  # lint-amnesty, pylint: disa
                 (ungraded_problem_2.location, {'due': None}),
                 (graded_problem_1.location, {'due': 5}),
             ]
-            sequence = modulestore().get_item(sequence.location)
+            sequence = self.store.get_item(sequence.location)
+            self.assertCountEqual(_gather_graded_items(sequence, 5), expected_graded_items)
+
+    def test_sequence_with_ora_and_non_ora_assignments(self):
+        """
+        _gather_graded_items should not set a due date for ORA problems
+        """
+        with self.store.bulk_operations(self.course.id):
+            sequence = ItemFactory(parent=self.course, category="sequential")
+            vertical = ItemFactory(parent=sequence, category="vertical")
+            sequence = self.store.get_item(sequence.location)
+            ItemFactory.create(
+                parent=vertical,
+                category='openassessment',
+                graded=True
+            )
+            ungraded_problem_2 = ItemFactory.create(
+                parent=vertical,
+                category='problem',
+                graded=True,
+                weight=0,
+            )
+            graded_problem_1 = ItemFactory.create(
+                parent=vertical,
+                category='problem',
+                graded=True,
+                weight=1,
+            )
+            expected_graded_items = [
+                (ungraded_problem_2.location, {'due': None}),
+                (graded_problem_1.location, {'due': 5}),
+            ]
+            sequence = self.store.get_item(sequence.location)
             self.assertCountEqual(_gather_graded_items(sequence, 5), expected_graded_items)
