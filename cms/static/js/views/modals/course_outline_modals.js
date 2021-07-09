@@ -414,31 +414,19 @@ define(['jquery', 'backbone', 'underscore', 'gettext', 'js/views/baseview',
                 BaseModal.prototype.disableActionButton.call(this.parent, 'save');
             }
             else if (!this.getValue()){
-                this.$('#warning').hide();
+                this.$('#due-num-weeks-warning-max').hide();
+                this.$('#due-num-weeks-warning-min').hide();
                 this.$('#projected').hide();
             }
             else {
                 this.$('#due-num-weeks-warning-max').hide();
                 this.$('#due-num-weeks-warning-min').hide();
-                // HtmlUtils.setHtml(
-                //     this.$el,
-                //     this.template({
-                //         startDate: DateUtils.parseDateFromString(this.model.get('start')),
-                //     })
-                // );
-                // thisTemplate = this.loadTemplate('self-paced-due-date-editor');
-                // html = thisTemplate({
-                //     startDate: DateUtils.parseDateFromString(this.model.get('start')),
-                //     newDueDate: rojected_date.getDate() + this.model.get('due_num_weeks')*7
-                // });
-                // HtmlUtils.setHtml(this.$el, HtmlUtils.HTML(html));
                 var startDate = DateUtils.parseDateFromString(this.model.get('start'))
                 this.$("#startDate").html(startDate.toDateString());
                 var projectedDate = new Date()
                 projectedDate.setDate(startDate.getDate() + this.getValue()*7);
                 this.$("#projectedDueIn").html(projectedDate.toDateString());
                 this.$('#projected').show();
-                this.$('#warning').hide();
                 BaseModal.prototype.enableActionButton.call(this.parent, 'save');
             }
         },
