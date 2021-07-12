@@ -421,12 +421,14 @@ define(['jquery', 'backbone', 'underscore', 'gettext', 'js/views/baseview',
             else {
                 this.$('#due-num-weeks-warning-max').hide();
                 this.$('#due-num-weeks-warning-min').hide();
-                var startDate = DateUtils.parseDateFromString(this.model.get('start'))
-                this.$("#startDate").html(startDate.toDateString());
-                var projectedDate = new Date()
-                projectedDate.setDate(startDate.getDate() + this.getValue()*7);
-                this.$("#projectedDueIn").html(projectedDate.toDateString());
-                this.$('#projected').show();
+                if (this.model.get('start')){
+                    var startDate = DateUtils.parseDateFromString(this.model.get('start'))
+                    this.$("#startDate").html(startDate.toDateString());
+                    var projectedDate = new Date()
+                    projectedDate.setDate(startDate.getDate() + this.getValue()*7);
+                    this.$("#projectedDueIn").html(projectedDate.toDateString());
+                    this.$('#projected').show();
+                }
                 BaseModal.prototype.enableActionButton.call(this.parent, 'save');
             }
         },
@@ -440,7 +442,7 @@ define(['jquery', 'backbone', 'underscore', 'gettext', 'js/views/baseview',
             AbstractEditor.prototype.afterRender.call(this);
             this.$('.field-due-in input').val(this.model.get('due_num_weeks'));
 
-            if (this.getValue()){
+            if (this.getValue() && this.model.get('start')){
                 var startDate = DateUtils.parseDateFromString(this.model.get('start'))
                 this.$("#startDate").html(startDate.toDateString());
                 var projectedDate = new Date()
