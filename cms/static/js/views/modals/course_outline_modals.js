@@ -407,10 +407,12 @@ define(['jquery', 'backbone', 'underscore', 'gettext', 'js/views/baseview',
         validateDueIn: function() {
             if (this.getValue() > 18){
                 this.$('#due-num-weeks-warning-max').show();
+                this.$('#projected').hide();
                 BaseModal.prototype.disableActionButton.call(this.parent, 'save');
             }
             else if (this.getValue() < 1){
                 this.$('#due-num-weeks-warning-min').show()
+                this.$('#projected').hide();
                 BaseModal.prototype.disableActionButton.call(this.parent, 'save');
             }
             else if (!this.getValue()){
@@ -421,6 +423,7 @@ define(['jquery', 'backbone', 'underscore', 'gettext', 'js/views/baseview',
             else {
                 this.$('#due-num-weeks-warning-max').hide();
                 this.$('#due-num-weeks-warning-min').hide();
+                this.$('#projected').hide();
                 if (this.model.get('start')){
                     var startDate = DateUtils.parseDateFromString(this.model.get('start'))
                     this.$("#startDate").html(startDate.toDateString());
@@ -441,6 +444,7 @@ define(['jquery', 'backbone', 'underscore', 'gettext', 'js/views/baseview',
         afterRender: function() {
             AbstractEditor.prototype.afterRender.call(this);
             this.$('.field-due-in input').val(this.model.get('due_num_weeks'));
+            this.$('#projected').hide();
 
             if (this.getValue() && this.model.get('start')){
                 var startDate = DateUtils.parseDateFromString(this.model.get('start'))
@@ -448,9 +452,7 @@ define(['jquery', 'backbone', 'underscore', 'gettext', 'js/views/baseview',
                 var projectedDate = new Date()
                 projectedDate.setDate(startDate.getDate() + this.getValue()*7);
                 this.$("#projectedDueIn").html(projectedDate.toDateString());
-            }
-            else {
-                this.$('#projected').hide();
+                this.$('#projected').show();
             }
         },
 
