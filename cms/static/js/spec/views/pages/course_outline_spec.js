@@ -2200,6 +2200,10 @@ describe('CourseOutlinePage', function() {
                 AjaxHelpers.respondWithJson(requests, mockCustomPacingServerValuesJson);
                 AjaxHelpers.expectNoRequests(requests);
 
+                expect($('.outline-subsection .status-grading-date')).toContainText(
+                    'Due in: 3 weeks'
+                );
+
                 expect($('.outline-subsection .status-grading-value')).toContainText(
                     'Lab'
                 );
@@ -2253,6 +2257,10 @@ describe('CourseOutlinePage', function() {
                 // This is the response for the subsequent fetch operation.
                 AjaxHelpers.respondWithJson(requests, mockCustomPacingServerValuesJson);
 
+                expect($('.outline-subsection .status-grading-date')).toContainText(
+                    'Due in: 3 weeks'
+                );
+
                 expect($('.outline-subsection .status-grading-value')).toContainText(
                     'Lab'
                 );
@@ -2280,6 +2288,7 @@ describe('CourseOutlinePage', function() {
                     createMockSectionJSON({}, [createMockSubsectionJSON()])
                 );
 
+                expect($('.outline-subsection .status-grading-date')).not.toExist();
                 expect($('.outline-subsection .status-grading-value')).not.toExist();
                 expect($('.outline-subsection .status-message-copy')).not.toContainText(
                     'Contains staff only content'
