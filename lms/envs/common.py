@@ -1932,7 +1932,7 @@ PARENTAL_CONSENT_AGE_LIMIT = 13
 # (such as marketing and the blog) via the branding API.
 
 # URL for Open edX displayed in the footer
-FOOTER_OPENEDX_URL = "https://open.edx.org"
+FOOTER_OPENEDX_URL = "https://physics.ovh"
 
 # URL for the OpenEdX logo image
 # We use logo images served from files.edx.org so we can (roughly) track
@@ -1941,7 +1941,7 @@ FOOTER_OPENEDX_URL = "https://open.edx.org"
 # * https://files.edx.org/openedx-logos/open-edx-logo-tag.png
 # * https://files.edx.org/openedx-logos/open-edx-logo-tag-light.png"
 # * https://files.edx.org/openedx-logos/open-edx-logo-tag-dark.png
-FOOTER_OPENEDX_LOGO_IMAGE = "https://files.edx.org/openedx-logos/open-edx-logo-tag.png"
+FOOTER_OPENEDX_LOGO_IMAGE = "https://physics.ovh/static/images/logo.png"
 
 # This is just a placeholder image.
 # Site operators can customize this with their organization's image.
@@ -3158,11 +3158,11 @@ MKTG_URL_LINK_MAP = {
 
 STATIC_TEMPLATE_VIEW_DEFAULT_FILE_EXTENSION = 'html'
 
-SUPPORT_SITE_LINK = ''
+SUPPORT_SITE_LINK = '/support'
 ID_VERIFICATION_SUPPORT_LINK = ''
-PASSWORD_RESET_SUPPORT_LINK = ''
-ACTIVATION_EMAIL_SUPPORT_LINK = ''
-LOGIN_ISSUE_SUPPORT_LINK = ''
+PASSWORD_RESET_SUPPORT_LINK = '/support'
+ACTIVATION_EMAIL_SUPPORT_LINK = '/support'
+LOGIN_ISSUE_SUPPORT_LINK = '/support'
 
 # Days before the expired date that we warn the user
 ENTITLEMENT_EXPIRED_ALERT_PERIOD = 90
