@@ -1642,7 +1642,7 @@ PRESS_EMAIL = 'press@example.com'
 FINANCE_EMAIL = ''
 
 # Platform mailing address
-CONTACT_MAILING_ADDRESS = 'SET-ME-PLEASE'
+CONTACT_MAILING_ADDRESS = 'PhysicsOVH, Hyderabad.'
 
 # Account activation email sender address
 ACTIVATION_EMAIL_FROM_ADDRESS = ''
@@ -4669,5 +4669,5 @@ LOGO_IMAGE_EXTRA_TEXT = ''
 LOGO_URL = None
 LOGO_URL_PNG = None
 LOGO_TRADEMARK_URL = None
-FAVICON_URL = None
-DEFAULT_EMAIL_LOGO_URL = 'https://edx-cdn.org/v3/default/logo.png'
+FAVICON_URL = 'https://physics.ovh/static/images/favicon.ico'
+DEFAULT_EMAIL_LOGO_URL = 'https://physics.ovh/static/images/maillogo.png'
