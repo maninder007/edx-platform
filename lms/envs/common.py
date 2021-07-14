@@ -3164,11 +3164,11 @@ STATIC_TEMPLATE_VIEW_DEFAULT_FILE_EXTENSION = 'html'
 #PASSWORD_RESET_SUPPORT_LINK = '/support'
 #ACTIVATION_EMAIL_SUPPORT_LINK = '/support'
 #LOGIN_ISSUE_SUPPORT_LINK = '/support'
-SUPPORT_SITE_LINK = 'site_help'
+SUPPORT_SITE_LINK = '/site_help'
 ID_VERIFICATION_SUPPORT_LINK = ''
-PASSWORD_RESET_SUPPORT_LINK = 'password_reset_help'
-ACTIVATION_EMAIL_SUPPORT_LINK = 'activation_email_help'
-LOGIN_ISSUE_SUPPORT_LINK = 'login_issue_help'
+PASSWORD_RESET_SUPPORT_LINK = '/password_reset_help'
+ACTIVATION_EMAIL_SUPPORT_LINK = '/activation_email_help'
+LOGIN_ISSUE_SUPPORT_LINK = '/login_issue_help'
 
 # Days before the expired date that we warn the user
 ENTITLEMENT_EXPIRED_ALERT_PERIOD = 90
