@@ -3158,11 +3158,16 @@ MKTG_URL_LINK_MAP = {
 
 STATIC_TEMPLATE_VIEW_DEFAULT_FILE_EXTENSION = 'html'
 
-SUPPORT_SITE_LINK = '/support'
+#SUPPORT_SITE_LINK = '/support'
+#ID_VERIFICATION_SUPPORT_LINK = ''
+#PASSWORD_RESET_SUPPORT_LINK = '/support'
+#ACTIVATION_EMAIL_SUPPORT_LINK = '/support'
+#LOGIN_ISSUE_SUPPORT_LINK = '/support'
+SUPPORT_SITE_LINK = 'site_help'
 ID_VERIFICATION_SUPPORT_LINK = ''
-PASSWORD_RESET_SUPPORT_LINK = '/support'
-ACTIVATION_EMAIL_SUPPORT_LINK = '/support'
-LOGIN_ISSUE_SUPPORT_LINK = '/support'
+PASSWORD_RESET_SUPPORT_LINK = 'password_reset_help'
+ACTIVATION_EMAIL_SUPPORT_LINK = 'activation_email_help'
+LOGIN_ISSUE_SUPPORT_LINK = 'login_issue_help'
 
 # Days before the expired date that we warn the user
 ENTITLEMENT_EXPIRED_ALERT_PERIOD = 90
@@ -4670,4 +4675,4 @@ LOGO_URL = None
 LOGO_URL_PNG = None
 LOGO_TRADEMARK_URL = None
 FAVICON_URL = 'https://physics.ovh/static/images/favicon.ico'
-DEFAULT_EMAIL_LOGO_URL = 'https://physics.ovh/static/images/maillogo.png'
+DEFAULT_EMAIL_LOGO_URL = 'https://physics.ovh/static/indigo/images/logo.355545f67eda.png'
